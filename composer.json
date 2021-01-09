@@ -1,0 +1,11 @@
+{
+  "name": "smallsung/hyperf",
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "SmallSung\\Hyperf\\": "src/"
+    }
+  }
+}
