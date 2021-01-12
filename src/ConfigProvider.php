@@ -11,6 +11,7 @@ class ConfigProvider
         return [
             'dependencies'=>$this->dependencies(),
             'logger'=>$this->logger(),
+            'server'=>$this->server(),
         ];
     }
 
@@ -55,5 +56,16 @@ class ConfigProvider
             'handlers'=>$handlers
         ];
         return $loggers;
+    }
+
+    private function server(): array
+    {
+        return [
+            'settings'=>[
+                'http_parse_post'=>false,
+                'http_parse_cookie'=>false,
+                'http_parse_files'=>false,
+            ],
+        ];
     }
 }

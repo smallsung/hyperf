@@ -2,15 +2,24 @@
   "name": "smallsung/hyperf",
   "require": {
     "php": ">=7.4",
+    "ext-json": "*",
     "hyperf/di": "^2.1",
     "hyperf/utils": "^2.1",
     "hyperf/logger": "^2.1",
-    "bramus/monolog-colored-line-formatter": "^3.0"
+    "bramus/monolog-colored-line-formatter": "^3.0",
+    "hyperf/http-server": "^2.1",
+    "hyperf/exception-handler": "^2.1"
+  },
+  "require-dev": {
+    "swoole/ide-helper": "^4.5"
   },
   "autoload": {
     "psr-4": {
       "SmallSung\\Hyperf\\": "src/"
-    }
+    },
+    "files": [
+      "src/Utils/Function.php"
+    ]
   },
   "extra": {
     "hyperf": {
