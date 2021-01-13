@@ -10,6 +10,7 @@ class ConfigProvider
     {
         return [
             'dependencies'=>$this->dependencies(),
+            'annotations'=>$this->annotations(),
             'logger'=>$this->logger(),
             'server'=>$this->server(),
         ];
@@ -65,7 +66,24 @@ class ConfigProvider
                 'http_parse_post'=>false,
                 'http_parse_cookie'=>false,
                 'http_parse_files'=>false,
+
+                'task_ipc_mode'=>1,
+                'task_max_request'=>1000,
             ],
+        ];
+    }
+
+    private function annotations() : array
+    {
+        return [
+            'scan'=>[
+                'paths'=>[
+                    __DIR__
+                ],
+                'collectors'=>[
+
+                ],
+            ]
         ];
     }
 }
