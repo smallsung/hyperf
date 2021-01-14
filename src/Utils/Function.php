@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace SmallSung\Hyperf;
 
+use Hyperf\Snowflake\IdGeneratorInterface;
+use Hyperf\Utils\ApplicationContext;
 use JsonException;
 use function json_decode;
 use function json_encode;
@@ -31,4 +33,12 @@ function jsonDecode(string $json, bool $assoc = true, $depth = 512, int $options
 function jsonEncode($value, int $options = JSON_ERROR_NONE, $depth = 512): string
 {
     return json_encode($value, $options | JSON_THROW_ON_ERROR, $depth);
+}
+
+/**
+ * @return int
+ */
+function generateSnowflakeId(): int
+{
+    return ApplicationContext::getContainer()->get(IdGeneratorInterface::class)->generate();
 }

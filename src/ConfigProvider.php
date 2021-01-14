@@ -22,6 +22,9 @@ class ConfigProvider
             \Hyperf\Logger\LoggerFactory::class=>\SmallSung\Hyperf\Logger\LoggerFactory::class,
             \Hyperf\Contract\StdoutLoggerInterface::class=>\SmallSung\Hyperf\Logger\StdoutLogger::class,
             \Psr\Log\LoggerInterface::class=>\SmallSung\Hyperf\Logger\DefaultLogger::class,
+
+            \Hyperf\Snowflake\IdGeneratorInterface::class => \SmallSung\Hyperf\Snowflake\IdGenerator\SnowflakeIdGenerator::class,
+            \Hyperf\Snowflake\MetaGeneratorInterface::class => \SmallSung\Hyperf\Snowflake\MetaGeneratorFactory::class,
         ];
     }
 
