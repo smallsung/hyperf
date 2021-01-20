@@ -46,7 +46,7 @@ class ConfigProvider
             'constructor'=>[
                 'filename'=>BASE_PATH.'/runtime/logs/hyperf.log',
                 'maxFiles'=>180,
-                'level'=>\Monolog\Logger::DEBUG,
+                'level'=>\Monolog\Logger::INFO,
             ],
             'formatter'=>[
                 'class'=>\Monolog\Formatter\LineFormatter::class,
@@ -56,13 +56,14 @@ class ConfigProvider
 
         $loggers['default'] = [
             'handlers'=>[
+                $consoleHandler,
                 $rotatingFileHandler,
             ]
         ];
 
         $loggers[\SmallSung\Hyperf\Logger\StdoutLogger::class] = [
             'handlers'=>[
-                $consoleHandler
+                $consoleHandler,
             ]
         ];
 

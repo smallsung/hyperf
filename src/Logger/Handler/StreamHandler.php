@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SmallSung\Hyperf\Logger\Handler;
 
 use Monolog\Logger;
-use SmallSung\Hyperf\Exception\Exception;
+use SmallSung\Hyperf\Exception\InvalidArgumentException;
 
 class StreamHandler extends \Monolog\Handler\StreamHandler
 {
@@ -17,6 +17,10 @@ class StreamHandler extends \Monolog\Handler\StreamHandler
         $this->setAcceptedLevels($level);
     }
 
+    /**
+     * @param int|int[] $level
+     * @throws InvalidArgumentException
+     */
     public function setAcceptedLevels($level): void
     {
         if (is_array($level)){
@@ -28,7 +32,7 @@ class StreamHandler extends \Monolog\Handler\StreamHandler
                 return $level >= $minLevel && $level <= $maxLevel;
             }));
         }else{
-            throw new Exception();
+            throw new InvalidArgumentException();
         }
         $this->acceptedLevels = array_flip($acceptedLevels);
     }
