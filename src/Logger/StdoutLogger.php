@@ -10,6 +10,6 @@ class StdoutLogger
 {
     public function __invoke(ContainerInterface $container)
     {
-        return $container->get(\Hyperf\Logger\LoggerFactory::class)->get('', LoggerFactory::DEFAULT_GROUP_NAME);
+        return $container->get(\Hyperf\Logger\LoggerFactory::class)->get('', static::class);
     }
 }

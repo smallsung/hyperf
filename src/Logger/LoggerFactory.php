@@ -10,8 +10,6 @@ use Psr\Log\LoggerInterface;
 
 class LoggerFactory
 {
-    const DEFAULT_GROUP_NAME = 'default:smallsung';
-
     protected HyperfLoggerFactory $hyperfLoggerFactory;
 
     public function __construct(ContainerInterface $container)
