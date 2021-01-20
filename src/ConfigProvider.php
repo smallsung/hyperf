@@ -56,14 +56,14 @@ class ConfigProvider
 
         $loggers['default'] = [
             'handlers'=>[
-                $consoleHandler,
-                $rotatingFileHandler,
+                0=>$consoleHandler,
+                1=>$rotatingFileHandler,
             ]
         ];
 
         $loggers[\SmallSung\Hyperf\Logger\StdoutLogger::class] = [
             'handlers'=>[
-                $consoleHandler,
+                0=>$consoleHandler,
             ]
         ];
 
