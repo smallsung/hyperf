@@ -89,11 +89,14 @@ class ConfigProvider
         return [
             'scan'=>[
                 'paths'=>[
-                    __DIR__
+                    __DIR__,
                 ],
                 'collectors'=>[
 
                 ],
+                'ignore_annotations'=>[
+                    'mixin',
+                ]
             ]
         ];
     }

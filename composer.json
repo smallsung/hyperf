@@ -12,7 +12,9 @@
     "hyperf/framework": "^2.1",
     "opis/closure": "^3.6",
     "hyperf/snowflake": "^2.1",
-    "hyperf/contract": "^2.1"
+    "hyperf/contract": "^2.1",
+    "lcobucci/jwt": "^4.1",
+    "hyperf/redis": "^2.1"
   },
   "require-dev": {
     "swoole/ide-helper": "^4.5"

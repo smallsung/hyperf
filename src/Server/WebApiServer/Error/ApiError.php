@@ -9,6 +9,16 @@ class ApiError extends ApiErrorAbstract implements ApiErrorInterface
     protected int $errno;
     protected string $error;
 
+    public static function error(string $error = ''): self
+    {
+        return new static(-1, $error);
+    }
+
+    public static function errno(int $errno = -1): self
+    {
+        return new static($errno, '');
+    }
+
     public function __construct(int $errno = -1, string $error = '', $errorData = null)
     {
         $this->errno = $errno;

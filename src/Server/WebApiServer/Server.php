@@ -13,6 +13,14 @@ use SmallSung\Hyperf\Server\WebApiServer\Error\Handler\ApiErrorHandler;
 
 abstract class Server extends \SmallSung\Hyperf\Server\HttpServer\Server
 {
+    public function initCoreMiddleware(string $serverName): void
+    {
+        parent::initCoreMiddleware($serverName);
+        $this->middlewares = array_merge([
+            ApiErrorHandler::class,
+        ], $this->middlewares);
+    }
+
     protected function getDefaultExceptionHandler(): array
     {
         return array_merge([

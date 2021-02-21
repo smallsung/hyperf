@@ -13,6 +13,11 @@ abstract class ApiErrorAbstract extends \Exception implements ApiErrorInterface
      */
     protected $errorData = null;
 
+    public function getErrorData()
+    {
+        return $this->errorData;
+    }
+
     public function setErrorData($errorData): self
     {
         $this->errorData = $errorData;
