@@ -42,4 +42,19 @@ abstract class ApiErrorAbstract extends \Exception implements ApiErrorInterface
             'data'=>$this->getErrorData(),
         ];
     }
+
+    public static function new(...$args): self
+    {
+        return new static(...$args);
+    }
+
+    /**
+     * @param mixed ...$args
+     * @throws ApiErrorAbstract
+     */
+    public static function throw(...$args)
+    {
+        throw static::new(...$args);
+
+    }
 }
