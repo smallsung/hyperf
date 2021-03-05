@@ -51,7 +51,7 @@ class Storage
             $this->jsonWebTokenPoolName = $this->container->get(ConfigInterface::class)->get('jsonWebToken.pool', '');
         }
 
-        if ('' === $this->jsonWebTokenPoolName){
+        if ('' !== $this->jsonWebTokenPoolName){
             return $this->container->get(RedisFactory::class)->get($this->jsonWebTokenPoolName);
         }
         return null;
