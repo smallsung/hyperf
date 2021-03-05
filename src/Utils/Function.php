@@ -7,6 +7,7 @@ namespace SmallSung\Hyperf;
 use Hyperf\Snowflake\IdGeneratorInterface;
 use Hyperf\Utils\ApplicationContext;
 use JsonException;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use function json_decode;
 use function json_encode;
 
@@ -41,4 +42,12 @@ function jsonEncode($value, int $options = JSON_ERROR_NONE, $depth = 512): strin
 function generateSnowflakeId(): int
 {
     return ApplicationContext::getContainer()->get(IdGeneratorInterface::class)->generate();
+}
+
+/**
+ * @param object $event
+ */
+function emit(object $event): void
+{
+    ApplicationContext::getContainer()->get(EventDispatcherInterface::class)->dispatch($event);
 }
