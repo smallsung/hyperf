@@ -5,21 +5,23 @@ declare(strict_types=1);
 namespace SmallSung\Hyperf\Server\Middleware\JsonWebToken;
 
 use Hyperf\Contract\ConfigInterface;
-use Hyperf\Di\Annotation\Inject;
 use Hyperf\Redis\RedisFactory;
 use Hyperf\Redis\RedisProxy;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 use SmallSung\Hyperf\Exception\RuntimeException;
 
 class Storage
 {
-    /**
-     * @Inject()
-     * @var ContainerInterface
-     */
     protected ContainerInterface $container;
 
-    protected ?string $jsonWebTokenPoolName = null;
+    protected string $jsonWebTokenRedisPoolName;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+        $this->initStorage();
+    }
 
     public function exist(string $token): bool
     {
@@ -45,16 +47,21 @@ class Storage
         return $this->getRedis();
     }
 
+    protected function initStorage(): void
+    {
+        $this->initRedis();
+    }
+
     protected function getRedis(): ?RedisProxy
     {
-        if (is_null($this->jsonWebTokenPoolName)){
-            $this->jsonWebTokenPoolName = $this->container->get(ConfigInterface::class)->get('jsonWebToken.pool', '');
-        }
+        return empty($this->jsonWebTokenRedisPoolName) ? null : $this->container->get(RedisFactory::class)->get($this->jsonWebTokenRedisPoolName);
+    }
 
-        if ('' !== $this->jsonWebTokenPoolName){
-            return $this->container->get(RedisFactory::class)->get($this->jsonWebTokenPoolName);
+    protected function initRedis(): void
+    {
+        if (empty($this->jsonWebTokenRedisPoolName = $this->container->get(ConfigInterface::class)->get('jsonWebToken.pool', ''))){
+            $this->container->get(LoggerInterface::class)->warning('config.jsonWebToken.pool 未定义。不检查jsonWebToken！');
         }
-        return null;
     }
 
     protected function hashToken(string $token): string

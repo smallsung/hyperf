@@ -27,7 +27,7 @@ class Parser
     {
         try {
             $token = $this->configuration->parser()->parse($tokenString);
-            if ($this->configuration->validator()->assert($token, ...$this->configuration->validationConstraints())){
+            if ($this->configuration->validator()->validate($token, ...$this->configuration->validationConstraints())){
                 return $token;
             }
         }catch (Exception $exception){
